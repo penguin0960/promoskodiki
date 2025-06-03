@@ -9,3 +9,7 @@ body {
 .pricing-header {
   max-width: 700px;
 }
+
+.border-dashed {
+    border-style: dashed !important;
+}
