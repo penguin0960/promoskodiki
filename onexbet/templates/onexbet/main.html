@@ -192,17 +192,16 @@
                 </div>
                 <div class="col-1">
                     <img
+                            id="copyButton"
                             src="{% static 'onexbet/svg/copy.svg' %}"
-                            height="20"
-                            width="20"
-                            onclick="copyToClipboard(document.getElementById('promocode').innerHTML)"
+                            height="30"
+                            width="30"
+                            style="cursor: pointer"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            title="Скопировать"
                     >
                 </div>
-                <script>
-                  function copyToClipboard(text) {
-                    window.navigator.clipboard.writeText(text);
-                  }
-                </script>
             </div>
         </div>
       </div>
@@ -266,8 +265,22 @@
         </div>
     </footer>
 </div>
-<script src="{% static 'onexbet/css/bootstrap.bundle.min.js' %}"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-        class="astro-vvvwv3sm"></script>
+<script src="{% static 'onexbet/css/bootstrap.bundle.min.js' %}">
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var copyTooltip = new bootstrap.Tooltip(document.getElementById('copyButton'))
+        console.log(copyTooltip)
+
+          function copyToClipboard(e) {
+              navigator.clipboard.writeText(document.getElementById('promocode').innerText)
+              copyTooltip.show()
+              document.querySelector('.tooltip .tooltip-inner').textContent = 'Скопировано'
+          }
+
+          document.getElementById('copyButton').addEventListener('click', copyToClipboard)
+    });
+
+</script>
 </body>
 </html>
