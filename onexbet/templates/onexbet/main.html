@@ -137,6 +137,7 @@
     <main>
         <div class="row mb-3">
             <div class="col">
+                {% for code in promocodes %}
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-body">
                         <div class="row">
@@ -159,8 +160,10 @@
                             <div class="col-12 col-md-4">
                                 <button
                                     type="button"
-                                    class="w-100 btn btn-outline-primary mt-md-0 mt-2"
-                                    data-bs-toggle="modal" data-bs-target="#promoModal"
+                                    class="promocode-button w-100 btn btn-outline-primary mt-md-0 mt-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#promoModal"
+                                    data-promocode="{{ code.code }}"
                                 >
                                     Получить код
                                 </button>
@@ -168,6 +171,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </main>
@@ -271,15 +275,21 @@
     document.addEventListener('DOMContentLoaded', function() {
         var copyTooltip = new bootstrap.Tooltip(document.getElementById('copyButton'))
 
-          function copyToClipboard(e) {
-              if (window.isSecureContext) {
-                  navigator.clipboard.writeText(document.getElementById('promocode').innerText)
-              }
-              copyTooltip.show()
-              document.querySelector('.tooltip .tooltip-inner').textContent = 'Скопировано'
-          }
+        function copyToClipboard(e) {
+            if (window.isSecureContext) {
+                navigator.clipboard.writeText(document.getElementById('promocode').innerText)
+            }
+            copyTooltip.show()
+            document.querySelector('.tooltip .tooltip-inner').textContent = 'Скопировано'
+        }
 
-          document.getElementById('copyButton').addEventListener('click', copyToClipboard)
+        document.getElementById('copyButton').addEventListener('click', copyToClipboard)
+
+        document.querySelectorAll('.promocode-button').forEach(function (element) {
+            element.addEventListener('click', function (event) {
+                document.getElementById('promocode').innerText = event.target.getAttribute('data-promocode')
+            })
+        })
     });
 
 </script>
