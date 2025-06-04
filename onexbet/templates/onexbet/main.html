@@ -270,10 +270,11 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var copyTooltip = new bootstrap.Tooltip(document.getElementById('copyButton'))
-        console.log(copyTooltip)
 
           function copyToClipboard(e) {
-              navigator.clipboard.writeText(document.getElementById('promocode').innerText)
+              if (window.isSecureContext) {
+                  navigator.clipboard.writeText(document.getElementById('promocode').innerText)
+              }
               copyTooltip.show()
               document.querySelector('.tooltip .tooltip-inner').textContent = 'Скопировано'
           }
