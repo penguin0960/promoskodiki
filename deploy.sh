@@ -4,5 +4,5 @@ git reset --hard
 git pull
 ./venv/bin/pip install -r ./requirements.txt
 ./venv/bin/python3 ./manage.py migrate
-fuser -k 80/tcp
-./venv/bin/python3 ./manage.py runserver 31.128.41.25:80 &
+fuser -k 8000/tcp
+./venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 promokodiki.wsgi:application &
