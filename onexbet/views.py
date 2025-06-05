@@ -5,5 +5,5 @@ def main(request):
     return render(
         request,
         'onexbet/main.html',
-        {'promocodes': [{'code': 'CODE1'}, {'code': 'CODE2'}]}
+        {'promocodes': [{'code': 'PROMOCODE1'}]}
     )
